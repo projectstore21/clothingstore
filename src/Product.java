@@ -12,8 +12,8 @@ public class Product {
     public Product(String productName, double price, int amountInStock) {
         this.id = ++uniqueId;
         this.productName = productName;
-        this.price = price;
-        this.amountInStock = amountInStock;
+        setPrice(price);
+        setAmountInStock(amountInStock);
     }
 
     public int getId() {
@@ -37,21 +37,38 @@ public class Product {
     }
 
     public void setPrice(double price) {
-        this.price = price;
+        if (validatePrice(price)) {
+            this.price = price;
+        } else {
+            throw new IllegalArgumentException("Цена должна быть положительным значением.");
+        }
+    }
+
+    private boolean validatePrice(double price) {
+        return price >= 0;
     }
 
     public void setAmountInStock(int amountInStock) {
-        this.amountInStock = amountInStock;
+        if (validateAmountInStock(amountInStock)) {
+            this.amountInStock = amountInStock;
+        } else {
+            throw new IllegalArgumentException("Количество на складе должно быть неотрицательным целым числом.");
+        }
+    }
+
+    private boolean validateAmountInStock(int amountInStock) {
+        return amountInStock >= 0;
     }
 
     @Override
     public String toString() {
-        return "Product:" + " " +
+        return "Product: " +
                 "id = " + id + "; " +
-                "productName:" + " " + productName + "; " +
+                "productName: " + productName + "; " +
                 "price: " + price + "; " +
                 "amountInStock: " + amountInStock +
-                ").";
+                ".";
 
     }
 }
+    
