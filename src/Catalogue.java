@@ -10,15 +10,16 @@ public class Catalogue {
 
     public Catalogue() {
         this.catalogueId = ++uniqueCatalogueId;
+        this.catalogueProducts = new ArrayList<Product>();
     }
 
-    public Catalogue(int catalogueId, String catalogueName, ArrayList<Product> CatalogueProducts) {
+    public Catalogue(int catalogueId, String catalogueName, ArrayList<Product> catalogueProducts) {
         this.catalogueId = ++uniqueCatalogueId;
         this.catalogueName = catalogueName;
-        this.catalogueProducts = CatalogueProducts;
+        this.catalogueProducts = catalogueProducts;
     }
 
-    public void setCatalogueName (String CatalogueName) {
+    public void setCatalogueName (String catalogueName) {
         this.catalogueName = catalogueName;
     }
 
