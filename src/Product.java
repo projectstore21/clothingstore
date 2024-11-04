@@ -1,23 +1,23 @@
 public class Product {
     private static int uniqueId = 0;
-    private final int id;
+    private final int productId;
     private String productName;
     private double price;
     private int amountInStock;
 
     public Product() {
-        this.id = ++uniqueId;
+        this.productId = ++uniqueId;
     }
 
     public Product(String productName, double price, int amountInStock) {
-        this.id = ++uniqueId;
+        this.productId = ++uniqueId;
         this.productName = productName;
         setPrice(price);
         setAmountInStock(amountInStock);
     }
 
     public int getId() {
-        return id;
+        return productId;
     }
 
     public String getProductName() {
@@ -63,7 +63,7 @@ public class Product {
     @Override
     public String toString() {
         return "Product: " +
-                "id = " + id + "; " +
+                "ProductId = " + productId + "; " +
                 "productName: " + productName + "; " +
                 "price: " + price + "; " +
                 "amountInStock: " + amountInStock +
