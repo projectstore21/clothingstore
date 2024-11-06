@@ -20,6 +20,24 @@ public class Main {
         Product product13 = new Product("Men's Chinos", 15, 9);
         Product product14 = new Product("Men's Sportswear", 57, 4);
         Product product15 = new Product("Men's Tie", 13, 4);
+        Product product16 = new Product("Woman's coat", 28.05, 10);
+        Product product17 = new Product("Woman's vest", 13.6, 3);
+        Product product18 = new Product("Woman's cardigan", 15.87, 22);
+        Product product19 = new Product("Woman's jeans", 15, 13);
+        Product product20 = new Product("Woman's underwear", 14.06, 6);
+        Product product21 = new Product("Woman's shorts", 8.89, 9);
+        Product product22 = new Product("Woman's dress", 21.21, 8);
+        Product product23 = new Product("Woman's robe", 18.5, 19);
+        Product product24= new Product("Woman's blouse", 10.26, 11);
+        Product product25 = new Product("Woman's skirt", 19.5, 4);
+        Product product26 = new Product("Woman's bra", 11.89, 2);
+        Product product27= new Product("Woman's panties", 6.07, 1);
+        Product product28 = new Product("Woman's top", 17.3, 16);
+        Product product29 = new Product("Woman's swimsuit", 22, 7);
+        Product product30 = new Product();
+        product30.setProductName("Woman's socks");
+        product30.setPrice(2);
+        product30.setAmountInStock(5);
     }
 }
 
