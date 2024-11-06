@@ -101,7 +101,7 @@ public class User {
 
     public static void validateUserEmail(String userEmail) throws FormatException {
         if (!userEmail.contains("@")) {
-            throw new FormatException("It's the incorrect format of the email.");
+            throw new FormatException("It is the incorrect format of the email.");
         }
     }
 
@@ -119,7 +119,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User {" + "id='" + getUserId() + '\'' +
+        return "User{" + "id='" + getUserId() + '\'' +
                 ", name='" + getUserName() + '\'' +
                 ", surname='" + getUserSurname() + '\'' +
                 ", mail='" + getUserEmail() + '\'' +
