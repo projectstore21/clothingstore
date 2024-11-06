@@ -9,18 +9,21 @@ public class User {
     private String userEmail;
     private String userGender;
     private String userBirthday;
+    private String passportNumber;
+
 
     public User() {
         this.userId = ++uniqueUserId;
     }
 
-    public User(String userName, String userSurname, String userEmail, String userGender, String userBirthday) {
+    public User(String userName, String userSurname, String userEmail, String userGender, String userBirthday, String passportNumber) {
         this.userId = ++uniqueUserId;
         this.userName = userName;
         this.userSurname = userSurname;
         this.userEmail = userEmail;
         this.userGender = userGender;
         this.userBirthday = userBirthday;
+        this.passportNumber = passportNumber;
     }
 
     public int getUserId() {
@@ -67,18 +70,33 @@ public class User {
         this.userBirthday = userBirthday;
     }
 
-    public static User registerNewUser(String userName, String userSurname, String userEmail, String userGender, String userBirthday) {
+    public String getPassportNumber() {
+        return passportNumber;
+    }
+
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
+    }
+
+    public static User registerNewUser(String userName, String userSurname, String userEmail, String userGender, String userBirthday, String passportNumber) {
         try {
-            validateData(userName, userSurname, userEmail, userGender, userBirthday);
+            validateData(userName, userSurname, userEmail, userGender, userBirthday, passportNumber);
             validateUserEmail(userEmail);
             validateUserGender(userGender);
-        } catch (EmptyException | FormatException | EqualException e) {
+            validatePassportNumber(passportNumber);
+        } catch (EmptyException | FormatException | EqualException | InvalidPassportException e) {
             System.out.println("Can't create user " + userName + ". Error: " + e.getMessage());
             return null;
         }
-        User user = new User(userName, userSurname, userEmail, userGender, userBirthday);
+        User user = new User(userName, userSurname, userEmail, userGender, userBirthday, passportNumber);
         System.out.println("Create " + user);
         return user;
+    }
+
+    public static class InvalidPassportException extends Exception {
+        public InvalidPassportException(String message) {
+            super(message);
+        }
     }
 
     public static class EmptyException extends Exception {
@@ -87,8 +105,8 @@ public class User {
         }
     }
 
-    public static void validateData(String userName, String userSurname, String userEmail, String userGender, String userBirthday) throws EmptyException {
-        if (userName.isEmpty() || userSurname.isEmpty() || userEmail.isEmpty() || userGender.isEmpty() || userBirthday.isEmpty()) {
+    public static void validateData(String userName, String userSurname, String userEmail, String userGender, String userBirthday, String passportNumber) throws EmptyException {
+        if (userName.isEmpty() || userSurname.isEmpty() || userEmail.isEmpty() || userGender.isEmpty() || userBirthday.isEmpty() || passportNumber.isEmpty()) {
             throw new EmptyException("Data can't be empty.");
         }
     }
@@ -117,6 +135,12 @@ public class User {
         }
     }
 
+    public static void validatePassportNumber(String passportNumber) throws InvalidPassportException {
+        if (passportNumber.length() != 10) {
+            throw new InvalidPassportException("Passport number must be 10 characters long.");
+        }
+    }
+
     @Override
     public String toString() {
         return "User{" + "id='" + getUserId() + '\'' +
@@ -124,6 +148,7 @@ public class User {
                 ", surname='" + getUserSurname() + '\'' +
                 ", mail='" + getUserEmail() + '\'' +
                 ", gender='" + getUserGender() + '\'' +
-                ", B-day='" + getUserBirthday() + '\'' + '}';
+                ", B-day='" + getUserBirthday() + '\'' +
+                ", passport='" + getPassportNumber() + '\'' + '}';
     }
 }
