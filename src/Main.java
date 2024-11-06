@@ -28,10 +28,10 @@ public class Main {
         Product product21 = new Product("Woman's shorts", 8.89, 9);
         Product product22 = new Product("Woman's dress", 21.21, 8);
         Product product23 = new Product("Woman's robe", 18.5, 19);
-        Product product24= new Product("Woman's blouse", 10.26, 11);
+        Product product24 = new Product("Woman's blouse", 10.26, 11);
         Product product25 = new Product("Woman's skirt", 19.5, 4);
         Product product26 = new Product("Woman's bra", 11.89, 2);
-        Product product27= new Product("Woman's panties", 6.07, 1);
+        Product product27 = new Product("Woman's panties", 6.07, 1);
         Product product28 = new Product("Woman's top", 17.3, 16);
         Product product29 = new Product("Woman's swimsuit", 22, 7);
         Product product30 = new Product();
