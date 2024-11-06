@@ -44,6 +44,6 @@ public class Main {
         user3.setUserSurname("Irinina");
         user3.setUserEmail("irinina@mail.ru");
         user3.setUserGender("female");
-        user3.setUserBirthday("04.12.1987");
+        user3.setUserBirthday("04.12.1997");
     }
 }
