@@ -47,5 +47,3 @@ public class Main {
         user3.setUserBirthday("04.12.1987");
     }
 }
-
-
