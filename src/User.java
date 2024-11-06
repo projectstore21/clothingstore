@@ -11,7 +11,6 @@ public class User {
     private String userBirthday;
     private String passportNumber;
 
-
     public User() {
         this.userId = ++uniqueUserId;
     }
