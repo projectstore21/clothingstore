@@ -1,6 +1,7 @@
 public class Main {
     public static void main(String[] args) {
         System.out.println("Welcome to our clothing store!");
+
         Product product1 = new Product("Men's shirt", 7.88, 5);
         Product product2 = new Product("Men's jacket", 45, 8);
         Product product3 = new Product("Men's pants", 15, 4);
