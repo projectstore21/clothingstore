@@ -68,6 +68,15 @@ public class Main {
         user3.setUserGender("female");
         user3.setUserBirthday("04.12.1987");
         user3.setPassportNumber("ABCDE12345");
+        User user7 = User.registerNewUser("Nikita", "Nikitin", "nikitin@gmail.xom", "male", "14.01.1993", "DEFGH12345");
+        User user8 = new User("Elena", "Elenina", "elenina@gmail.com", "female", "30.12.2003", "IJKLM67890");
+        User user9 = new User();
+        user9.setUserName("Lara");
+        user9.setUserSurname("Larina");
+        user9.setUserEmail("larina@gmail.com");
+        user9.setUserGender("female");
+        user9.setUserBirthday("04.03.2000");
+        user9.setPassportNumber("NOPQR54321");
     }
 }
 
