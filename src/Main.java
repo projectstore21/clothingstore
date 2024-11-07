@@ -38,6 +38,28 @@ public class Main {
         product30.setProductName("Woman's socks");
         product30.setPrice(2);
         product30.setAmountInStock(5);
+        Product product31 = new Product("Children's t-shirt", 15.99, 11);
+        Product product32 = new Product("Children's sweater", 20.50, 7);
+        Product product33 = new Product("Children's jeans", 30.00, 10);
+        Product product34 = new Product();
+        product34.setProductName("Children's coat");
+        product34.setPrice(45.99);
+        product34.setAmountInStock(12);
+        Product product35 = new Product();
+        product35.setProductName("Children's swimwear");
+        product35.setPrice(10.99);
+        product35.setAmountInStock(3);
+        Product product36 = new Product("Children's socks", 5, 15);
+        Product product37 = new Product("Children's skirt", 10.50, 20);
+        Product product38 = new Product("Children's trousers", 15, 10);
+        Product product39 = new Product("Children's jacket", 50, 5);
+        Product product40 = new Product("Children's dress", 35, 11);
+        Product product41 = new Product("Children's longsleeve", 16, 35);
+        Product product42 = new Product("Children's jumper", 13.50, 17);
+        Product product43 = new Product("Children's pijamas", 10.99, 4);
+        Product product44 = new Product("Children's shirts", 15.99, 12);
+        Product product45 = new Product("Children's mono", 16.99, 30);
+
     }
 }
 
