@@ -58,7 +58,6 @@ public class Main {
         Product product43 = new Product("Children's pijamas", 10.99, 4);
         Product product44 = new Product("Children's shirts", 15.99, 12);
         Product product45 = new Product("Children's mono", 16.99, 30);
-
         User user1 = User.registerNewUser("Ivan", "Ivanov", "ivanov@mail.ru", "male", "15.02.1991", "1A2B3C4D5E");
         User user2 = new User("Petr", "Petrov", "petrov@mail.ru", "male", "13.08.2004", "12345ABCDE");
         User user3 = new User();
