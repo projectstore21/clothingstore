@@ -68,6 +68,7 @@ public class Main {
         user3.setUserGender("female");
         user3.setUserBirthday("04.12.1987");
         user3.setPassportNumber("ABCDE12345");
+
     }
 }
 
