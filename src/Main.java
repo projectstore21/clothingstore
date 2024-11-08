@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
@@ -94,6 +96,11 @@ public class Main {
         user9.setUserGender("female");
         user9.setUserBirthday("04.03.2000");
         user9.setPassportNumber("NOPQR54321");
+
+        Catalogue clothesForWoman = new Catalogue();
+        clothesForWoman.setCatalogueName("allClothesForWoman");
+        Stream streamForProductList = productList.stream();
+        clothesForWoman.setCatalogueProducts((ArrayList<Product>) streamForProductList.filter(x->x.toString().contains("Woman's")).collect(Collectors.toList()));
     }
 }
 
