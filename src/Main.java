@@ -104,8 +104,14 @@ public class Main {
 
         Catalogue clothesForMen = new Catalogue();
         clothesForMen.setCatalogueName("allClothesForMen");
-        Stream streamForProductList = productList.stream();
-        clothesForMen.setCatalogueProducts((ArrayList<Product>) streamForProductList.filter(x->x.toString().contains("Men's")).collect(Collectors.toList()));
+        Stream streamForProductList2 = productList.stream();
+        clothesForMen.setCatalogueProducts((ArrayList<Product>) streamForProductList2.filter(x->x.toString().contains("Men's")).collect(Collectors.toList()));
+
+        Catalogue clothesForChildren = new Catalogue();
+        clothesForChildren.setCatalogueName("allClothesForChildren");
+        Stream streamForProductList3 = productList.stream();
+        clothesForChildren.setCatalogueProducts((ArrayList<Product>) streamForProductList3.filter(x -> x.toString().contains("Children's")).collect(Collectors.toList()));
+
     }
 }
 
