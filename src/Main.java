@@ -101,6 +101,11 @@ public class Main {
         clothesForWoman.setCatalogueName("allClothesForWoman");
         Stream streamForProductList = productList.stream();
         clothesForWoman.setCatalogueProducts((ArrayList<Product>) streamForProductList.filter(x->x.toString().contains("Woman's")).collect(Collectors.toList()));
+
+        Catalogue clothesForMen = new Catalogue();
+        clothesForMen.setCatalogueName("allClothesForMen");
+        Stream streamForProductList = productList.stream();
+        clothesForMen.setCatalogueProducts((ArrayList<Product>) streamForProductList.filter(x->x.toString().contains("Men's")).collect(Collectors.toList()));
     }
 }
 
