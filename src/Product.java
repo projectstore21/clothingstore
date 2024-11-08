@@ -16,7 +16,7 @@ public class Product {
         setAmountInStock(amountInStock);
     }
 
-    public int getId() {
+    public int getProductId() {
         return productId;
     }
 
