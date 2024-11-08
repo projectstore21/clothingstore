@@ -19,11 +19,15 @@ public class Catalogue {
         this.catalogueProducts = catalogueProducts;
     }
 
-    public void setCatalogueName (String catalogueName) {
+    public void setCatalogueName(String catalogueName) {
         this.catalogueName = catalogueName;
     }
 
-    public void addProductToCatalogue (Product product) throws ProductNotFoundException {
+    public void setCatalogueProducts(ArrayList<Product> catalogueProducts) {
+        this.catalogueProducts = catalogueProducts;
+    }
+
+    public void addProductToCatalogue(Product product) throws ProductNotFoundException {
         if (product != null) {
             this.catalogueProducts.add(product);
         } else {
@@ -31,15 +35,15 @@ public class Catalogue {
         }
     }
 
-    public int getCatalogueId () {
+    public int getCatalogueId() {
         return catalogueId;
     }
 
-    public String getCatalogueName () {
+    public String getCatalogueName() {
         return catalogueName;
     }
 
-    public ArrayList<Product> getCatalogueProductList () {
+    public ArrayList<Product> getCatalogueProductList() {
         return catalogueProducts;
     }
 
