@@ -13,7 +13,7 @@ public class Catalogue {
         this.catalogueProducts = new ArrayList<Product>();
     }
 
-    public Catalogue(String catalogueName, ArrayList<Product> catalogueProducts) {
+    public Catalogue(int uniqueCatalogueId, String catalogueName, ArrayList<Product> catalogueProducts) {
         this.catalogueId = ++uniqueCatalogueId;
         this.catalogueName = catalogueName;
         this.catalogueProducts = catalogueProducts;

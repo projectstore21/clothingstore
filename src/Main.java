@@ -120,6 +120,7 @@ public class Main {
 
 
         Collections.shuffle(productList);
+        Catalogue catalogue = new Catalogue();
         Iterator<Product> productIterator = productList.iterator();
         userList.forEach(user -> {
             if (productIterator.hasNext()) {
@@ -134,7 +135,7 @@ public class Main {
                 }
                 System.out.println("User: " + user.getUserId() + " " + user.getUserName() + " " + user.getUserSurname() +
                         " положил в корзину товар с id=" + product.getProductId() + ", '" +
-                        product.getProductName() + "' из раздела каталога: " + catalogueName);
+                        product.getProductName() + "' из раздела каталога: " + catalogue.getCatalogueId()+ " "+ catalogueName);
             }
         });
     }
