@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -8,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Welcome to our clothing store!");
 
-        ArrayList<Product> productList = new ArrayList<>();
+        List<Product> productList = new ArrayList<>();
         productList.add(new Product("Men's shirt", 7.88, 5));
         productList.add(new Product("Men's jacket", 45, 8));
         productList.add(new Product("Men's pants", 15, 4));
@@ -71,7 +72,7 @@ public class Main {
         productList.add(new Product("Children's shirts", 15.99, 12));
         productList.add(new Product("Children's mono", 16.99, 30));
 
-        ArrayList<User> userList = new ArrayList<>();
+        List<User> userList = new ArrayList<>();
         userList.add(new User("Ivan", "Ivanov", "ivanov@mail.ru", "male", "15.02.1991", "1A2B3C4D5E"));
         userList.add(new User("Petr", "Petrov", "petrov@mail.ru", "male", "13.08.2004", "12345ABCDE"));
         User user3 = new User();
@@ -105,27 +106,35 @@ public class Main {
 
         Catalogue clothesForWoman = new Catalogue();
         clothesForWoman.setCatalogueName("allClothesForWoman");
-        Stream streamForProductList = productList.stream();
-        clothesForWoman.setCatalogueProducts((ArrayList<Product>) streamForProductList.filter(x -> x.toString().contains("Woman's")).collect(Collectors.toList()));
+        ArrayList<Product> products = (ArrayList<Product>) productList.stream().filter(product -> product.toString().contains("Woman's")).toList();
+        for (Product product: products) {
+            product.setCatalogue(clothesForWoman);
+        }
+        clothesForWoman.setCatalogueProducts(products);
 
         Catalogue clothesForMen = new Catalogue();
         clothesForMen.setCatalogueName("allClothesForMen");
-        Stream streamForProductList2 = productList.stream();
-        clothesForMen.setCatalogueProducts((ArrayList<Product>) streamForProductList2.filter(x -> x.toString().contains("Men's")).collect(Collectors.toList()));
+        ArrayList<Product> products1 = (ArrayList<Product>) productList.stream().filter(product -> product.toString().contains("Men's")).toList();
+       for (Product product: products1) {
+           product.setCatalogue(clothesForMen);
+       }
+       clothesForMen.setCatalogueProducts(products1);
 
         Catalogue clothesForChildren = new Catalogue();
         clothesForChildren.setCatalogueName("allClothesForChildren");
-        Stream streamForProductList3 = productList.stream();
-        clothesForChildren.setCatalogueProducts((ArrayList<Product>) streamForProductList3.filter(x -> x.toString().contains("Children's")).collect(Collectors.toList()));
-
+        ArrayList<Product> products3 = (ArrayList<Product>) productList.stream().filter(product -> product.toString().contains("Children's")).toList();
+        for (Product product: products3) {
+            product.setCatalogue(clothesForChildren);
+        }
+        clothesForChildren.setCatalogueProducts(products3);
+        System.out.println(clothesForWoman);
 
         Collections.shuffle(productList);
-        Catalogue catalogue = new Catalogue();
         Iterator<Product> productIterator = productList.iterator();
         userList.forEach(user -> {
             if (productIterator.hasNext()) {
                 Product product = productIterator.next();
-                String catalogueName = "Unknown";
+                String catalogueName = "";
                 if (product.getProductName().contains("Woman")) {
                     catalogueName = clothesForWoman.getCatalogueName();
                 } else if (product.getProductName().contains("Men")) {
@@ -135,7 +144,7 @@ public class Main {
                 }
                 System.out.println("User: " + user.getUserId() + " " + user.getUserName() + " " + user.getUserSurname() +
                         " положил в корзину товар с id=" + product.getProductId() + ", '" +
-                        product.getProductName() + "' из раздела каталога: " + catalogue.getCatalogueId()+ " "+ catalogueName);
+                        product.getProductName() + "' из раздела каталога: " + catalogueName);
             }
         });
     }

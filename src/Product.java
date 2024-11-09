@@ -4,6 +4,7 @@ public class Product {
     private String productName;
     private double price;
     private int amountInStock;
+    private Catalogue catalogue;
 
     public Product() {
         this.productId = ++uniqueId;
@@ -14,6 +15,14 @@ public class Product {
         this.productName = productName;
         setPrice(price);
         setAmountInStock(amountInStock);
+    }
+
+   public Catalogue getCatalogue(){
+        return catalogue;
+   }
+
+    public void setCatalogue(Catalogue catalogue) {
+        this.catalogue = catalogue;
     }
 
     public int getProductId() {
