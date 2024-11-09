@@ -106,21 +106,21 @@ public class Main {
 
         Catalogue clothesForWoman = new Catalogue();
         clothesForWoman.setCatalogueName("allClothesForWoman");
-        List<Product> products = productList.stream().filter(product -> product.toString().contains("Woman's")).toList();
-        for (Product product : products) {product.setCatalogue(clothesForWoman);}
-        clothesForWoman.setCatalogueProducts(products);
+        List<Product> womanProducts = productList.stream().filter(product -> product.toString().contains("Woman's")).toList();
+        for (Product product : womanProducts) {product.setCatalogue(clothesForWoman);}
+        clothesForWoman.setCatalogueProducts(womanProducts);
 
         Catalogue clothesForMen = new Catalogue();
         clothesForMen.setCatalogueName("allClothesForMen");
-        List<Product> products1 = productList.stream().filter(product -> product.toString().contains("Men's")).toList();
-        for (Product product : products1) {product.setCatalogue(clothesForMen);}
-        clothesForMen.setCatalogueProducts(products1);
+        List<Product> menProducts = productList.stream().filter(product -> product.toString().contains("Men's")).toList();
+        for (Product product : menProducts) {product.setCatalogue(clothesForMen);}
+        clothesForMen.setCatalogueProducts(menProducts);
 
         Catalogue clothesForChildren = new Catalogue();
         clothesForChildren.setCatalogueName("allClothesForChildren");
-        List<Product> products2 = productList.stream().filter(product -> product.toString().contains("Children's")).toList();
-        for (Product product : products2) {product.setCatalogue(clothesForChildren);}
-        clothesForChildren.setCatalogueProducts(products2);
+        List<Product> childrenProducts = productList.stream().filter(product -> product.toString().contains("Children's")).toList();
+        for (Product product : childrenProducts) {product.setCatalogue(clothesForChildren);}
+        clothesForChildren.setCatalogueProducts(childrenProducts);
 
         Collections.shuffle(productList);
         Iterator<Product> productIterator = productList.iterator();

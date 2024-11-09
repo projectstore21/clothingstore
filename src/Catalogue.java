@@ -44,10 +44,6 @@ public class Catalogue {
         return catalogueName;
     }
 
-    public ArrayList<Product> getCatalogueProductList() {
-        return (ArrayList<Product>) catalogueProducts;
-    }
-
     @Override
     public String toString() {
         return "Catalogue Id: " + catalogueId +
