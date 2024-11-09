@@ -81,6 +81,7 @@ public class Main {
         user3.setUserGender("female");
         user3.setUserBirthday("04.12.1987");
         user3.setPassportNumber("ABCDE12345");
+        userList.add(user3);
         userList.add(new User("Eis", "Schneeman", "schneeman@gmail.com", "male", "23.12.2000", "78903C4D5E"));
         userList.add(new User("Mark", "Rober", "rober@gmail.com", "male", "18.02.1977", "12345A1234"));
         User user6 = new User();
@@ -90,6 +91,7 @@ public class Main {
         user6.setUserGender("female");
         user6.setUserBirthday("12.12.2000");
         user6.setPassportNumber("123456789W");
+        userList.add(user6);
         userList.add(new User("Nikita", "Nikitin", "nikitin@gmail.xom", "male", "14.01.1993", "DEFGH12345"));
         userList.add(new User("Elena", "Elenina", "elenina@gmail.com", "female", "30.12.2003", "IJKLM67890"));
         User user9 = new User();
@@ -99,6 +101,7 @@ public class Main {
         user9.setUserGender("female");
         user9.setUserBirthday("04.03.2000");
         user9.setPassportNumber("NOPQR54321");
+        userList.add(user9);
 
         Catalogue clothesForWoman = new Catalogue();
         clothesForWoman.setCatalogueName("allClothesForWoman");
@@ -129,13 +132,10 @@ public class Main {
                 } else if (product.getProductName().contains("Children")) {
                     catalogueName = clothesForChildren.getCatalogueName();
                 }
-                System.out.println("User " + user.getUserName() + " " + user.getUserSurname() +
+                System.out.println("User: " + user.getUserId() + " " + user.getUserName() + " " + user.getUserSurname() +
                         " положил в корзину товар с id=" + product.getProductId() + ", '" +
                         product.getProductName() + "' из раздела каталога: " + catalogueName);
             }
         });
     }
 }
-
-
-
