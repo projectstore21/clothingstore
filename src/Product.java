@@ -76,8 +76,7 @@ public class Product {
                 "productName: " + productName + "; " +
                 "price: " + price + "; " +
                 "amountInStock: " + amountInStock +
-                ".";
-
+                "; catalogue: " + (catalogue != null ? catalogue.getCatalogueName() : "None");
     }
 }
     

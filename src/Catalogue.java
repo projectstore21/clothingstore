@@ -24,7 +24,7 @@ public class Catalogue {
         this.catalogueName = catalogueName;
     }
 
-    public void setCatalogueProducts(ArrayList<Product> catalogueProducts) {
+    public void setCatalogueProducts(List<Product> catalogueProducts) {
         this.catalogueProducts = catalogueProducts;
     }
 

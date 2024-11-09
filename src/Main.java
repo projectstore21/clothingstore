@@ -106,46 +106,43 @@ public class Main {
 
         Catalogue clothesForWoman = new Catalogue();
         clothesForWoman.setCatalogueName("allClothesForWoman");
-        ArrayList<Product> products = (ArrayList<Product>) productList.stream().filter(product -> product.toString().contains("Woman's")).toList();
-        for (Product product: products) {
+        List<Product> products =  productList.stream().filter(product -> product.toString().contains("Woman's")).toList();
+        for (Product product : products) {
             product.setCatalogue(clothesForWoman);
         }
         clothesForWoman.setCatalogueProducts(products);
 
         Catalogue clothesForMen = new Catalogue();
         clothesForMen.setCatalogueName("allClothesForMen");
-        ArrayList<Product> products1 = (ArrayList<Product>) productList.stream().filter(product -> product.toString().contains("Men's")).toList();
-       for (Product product: products1) {
-           product.setCatalogue(clothesForMen);
-       }
-       clothesForMen.setCatalogueProducts(products1);
+        List<Product> products1 = productList.stream().filter(product -> product.toString().contains("Men's")).toList();
+        for (Product product : products1) {
+            product.setCatalogue(clothesForMen);
+        }
+        clothesForMen.setCatalogueProducts( products1);
 
         Catalogue clothesForChildren = new Catalogue();
         clothesForChildren.setCatalogueName("allClothesForChildren");
-        ArrayList<Product> products3 = (ArrayList<Product>) productList.stream().filter(product -> product.toString().contains("Children's")).toList();
-        for (Product product: products3) {
+        List<Product> products2 =  productList.stream().filter(product -> product.toString().contains("Children's")).toList();
+        for (Product product : products2) {
             product.setCatalogue(clothesForChildren);
         }
-        clothesForChildren.setCatalogueProducts(products3);
-        System.out.println(clothesForWoman);
+        clothesForChildren.setCatalogueProducts( products2);
 
         Collections.shuffle(productList);
         Iterator<Product> productIterator = productList.iterator();
+
         userList.forEach(user -> {
             if (productIterator.hasNext()) {
                 Product product = productIterator.next();
-                String catalogueName = "";
-                if (product.getProductName().contains("Woman")) {
-                    catalogueName = clothesForWoman.getCatalogueName();
-                } else if (product.getProductName().contains("Men")) {
-                    catalogueName = clothesForMen.getCatalogueName();
-                } else if (product.getProductName().contains("Children")) {
-                    catalogueName = clothesForChildren.getCatalogueName();
-                }
-                System.out.println("User: " + user.getUserId() + " " + user.getUserName() + " " + user.getUserSurname() +
+                Catalogue productCatalogue = product.getCatalogue();
+
+                System.out.println("User " + user.getUserId() + " " + user.getUserName() + " " + user.getUserSurname() +
                         " положил в корзину товар с id=" + product.getProductId() + ", '" +
-                        product.getProductName() + "' из раздела каталога: " + catalogueName);
+                        product.getProductName() + "' из раздела каталога id=" + productCatalogue.getCatalogueId() +
+                        " \"" + productCatalogue.getCatalogueName() + "\".");
             }
+
         });
     }
 }
+
