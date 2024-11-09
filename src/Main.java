@@ -124,6 +124,8 @@ public class Main {
         clothesForChildren.setCatalogueProducts(childrenProducts);
         catalogueList.add(clothesForChildren);
 
+        catalogueList.stream().forEach(catalogue -> System.out.println(catalogue));
+
         Collections.shuffle(productList);
         Iterator<Product> productIterator = productList.iterator();
         userList.forEach(user -> {
