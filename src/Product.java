@@ -17,9 +17,9 @@ public class Product {
         setAmountInStock(amountInStock);
     }
 
-   public Catalogue getCatalogue(){
+    public Catalogue getCatalogue() {
         return catalogue;
-   }
+    }
 
     public void setCatalogue(Catalogue catalogue) {
         this.catalogue = catalogue;

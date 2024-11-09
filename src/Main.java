@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -101,29 +98,36 @@ public class Main {
         user9.setUserBirthday("04.03.2000");
         user9.setPassportNumber("NOPQR54321");
         userList.add(user9);
+        Map<String, User> userMap = new HashMap<>();
+        for (int i =0; i<userList.size(); i++){
+            userMap.put(userList.get(i).getPassportNumber(),userList.get(i));
+        }
 
         List<Catalogue> catalogueList = new ArrayList<>();
         Catalogue clothesForWoman = new Catalogue();
         clothesForWoman.setCatalogueName("allClothesForWoman");
         List<Product> womanProducts = productList.stream().filter(product -> product.toString().contains("Woman's")).toList();
-        for (Product product : womanProducts) {product.setCatalogue(clothesForWoman);}
+        for (Product product : womanProducts) {
+            product.setCatalogue(clothesForWoman);
+        }
         clothesForWoman.setCatalogueProducts(womanProducts);
         catalogueList.add(clothesForWoman);
-
         Catalogue clothesForMen = new Catalogue();
         clothesForMen.setCatalogueName("allClothesForMen");
         List<Product> menProducts = productList.stream().filter(product -> product.toString().contains("Men's")).toList();
-        for (Product product : menProducts) {product.setCatalogue(clothesForMen);}
+        for (Product product : menProducts) {
+            product.setCatalogue(clothesForMen);
+        }
         clothesForMen.setCatalogueProducts(menProducts);
         catalogueList.add(clothesForMen);
-
         Catalogue clothesForChildren = new Catalogue();
         clothesForChildren.setCatalogueName("allClothesForChildren");
         List<Product> childrenProducts = productList.stream().filter(product -> product.toString().contains("Children's")).toList();
-        for (Product product : childrenProducts) {product.setCatalogue(clothesForChildren);}
+        for (Product product : childrenProducts) {
+            product.setCatalogue(clothesForChildren);
+        }
         clothesForChildren.setCatalogueProducts(childrenProducts);
         catalogueList.add(clothesForChildren);
-
         catalogueList.stream().forEach(catalogue -> System.out.println(catalogue));
 
         Collections.shuffle(productList);

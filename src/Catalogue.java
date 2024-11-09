@@ -3,6 +3,7 @@ import Exceptions.ProductNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Catalogue {
     private static int uniqueCatalogueId = 0;
     private final int catalogueId;
@@ -14,7 +15,7 @@ public class Catalogue {
         this.catalogueProducts = new ArrayList<>();
     }
 
-    public Catalogue( String catalogueName, ArrayList<Product> catalogueProducts) {
+    public Catalogue(String catalogueName, ArrayList<Product> catalogueProducts) {
         this.catalogueId = ++uniqueCatalogueId;
         this.catalogueName = catalogueName;
         this.catalogueProducts = catalogueProducts;
