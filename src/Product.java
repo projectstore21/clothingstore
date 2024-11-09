@@ -4,6 +4,7 @@ public class Product {
     private String productName;
     private double price;
     private int amountInStock;
+    private Catalogue catalogue;
 
     public Product() {
         this.productId = ++uniqueId;
@@ -16,7 +17,15 @@ public class Product {
         setAmountInStock(amountInStock);
     }
 
-    public int getId() {
+   public Catalogue getCatalogue(){
+        return catalogue;
+   }
+
+    public void setCatalogue(Catalogue catalogue) {
+        this.catalogue = catalogue;
+    }
+
+    public int getProductId() {
         return productId;
     }
 
@@ -67,8 +76,7 @@ public class Product {
                 "productName: " + productName + "; " +
                 "price: " + price + "; " +
                 "amountInStock: " + amountInStock +
-                ".";
-
+                "; catalogue: " + (catalogue != null ? catalogue.getCatalogueName() : "None");
     }
 }
     

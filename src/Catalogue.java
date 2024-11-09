@@ -1,19 +1,20 @@
 import Exceptions.ProductNotFoundException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Catalogue {
     private static int uniqueCatalogueId = 0;
     private final int catalogueId;
     private String catalogueName;
-    private ArrayList<Product> catalogueProducts;
+    private List<Product> catalogueProducts;
 
     public Catalogue() {
         this.catalogueId = ++uniqueCatalogueId;
-        this.catalogueProducts = new ArrayList<Product>();
+        this.catalogueProducts = new ArrayList<>();
     }
 
-    public Catalogue(String catalogueName, ArrayList<Product> catalogueProducts) {
+    public Catalogue( String catalogueName, ArrayList<Product> catalogueProducts) {
         this.catalogueId = ++uniqueCatalogueId;
         this.catalogueName = catalogueName;
         this.catalogueProducts = catalogueProducts;
@@ -23,7 +24,7 @@ public class Catalogue {
         this.catalogueName = catalogueName;
     }
 
-    public void setCatalogueProducts(ArrayList<Product> catalogueProducts) {
+    public void setCatalogueProducts(List<Product> catalogueProducts) {
         this.catalogueProducts = catalogueProducts;
     }
 
@@ -41,10 +42,6 @@ public class Catalogue {
 
     public String getCatalogueName() {
         return catalogueName;
-    }
-
-    public ArrayList<Product> getCatalogueProductList() {
-        return catalogueProducts;
     }
 
     @Override

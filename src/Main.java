@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -6,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Welcome to our clothing store!");
 
-        ArrayList<Product> productList = new ArrayList<>();
+        List<Product> productList = new ArrayList<>();
         productList.add(new Product("Men's shirt", 7.88, 5));
         productList.add(new Product("Men's jacket", 45, 8));
         productList.add(new Product("Men's pants", 15, 4));
@@ -69,8 +72,9 @@ public class Main {
         productList.add(new Product("Children's shirts", 15.99, 12));
         productList.add(new Product("Children's mono", 16.99, 30));
 
-        User user1 = User.registerNewUser("Ivan", "Ivanov", "ivanov@mail.ru", "male", "15.02.1991", "1A2B3C4D5E");
-        User user2 = new User("Petr", "Petrov", "petrov@mail.ru", "male", "13.08.2004", "12345ABCDE");
+        List<User> userList = new ArrayList<>();
+        userList.add(new User("Ivan", "Ivanov", "ivanov@mail.ru", "male", "15.02.1991", "1A2B3C4D5E"));
+        userList.add(new User("Petr", "Petrov", "petrov@mail.ru", "male", "13.08.2004", "12345ABCDE"));
         User user3 = new User();
         user3.setUserName("Ira");
         user3.setUserSurname("Irinina");
@@ -78,8 +82,9 @@ public class Main {
         user3.setUserGender("female");
         user3.setUserBirthday("04.12.1987");
         user3.setPassportNumber("ABCDE12345");
-        User user4 = User.registerNewUser("Eis", "Schneeman", "schneeman@gmail.com", "male", "23.12.2000", "78903C4D5E");
-        User user5 = new User("Mark", "Rober", "rober@gmail.com", "male", "18.02.1977", "12345A1234");
+        userList.add(user3);
+        userList.add(new User("Eis", "Schneeman", "schneeman@gmail.com", "male", "23.12.2000", "78903C4D5E"));
+        userList.add(new User("Mark", "Rober", "rober@gmail.com", "male", "18.02.1977", "12345A1234"));
         User user6 = new User();
         user6.setUserName("Fabian");
         user6.setUserSurname("Huber");
@@ -87,8 +92,9 @@ public class Main {
         user6.setUserGender("female");
         user6.setUserBirthday("12.12.2000");
         user6.setPassportNumber("123456789W");
-        User user7 = User.registerNewUser("Nikita", "Nikitin", "nikitin@gmail.xom", "male", "14.01.1993", "DEFGH12345");
-        User user8 = new User("Elena", "Elenina", "elenina@gmail.com", "female", "30.12.2003", "IJKLM67890");
+        userList.add(user6);
+        userList.add(new User("Nikita", "Nikitin", "nikitin@gmail.xom", "male", "14.01.1993", "DEFGH12345"));
+        userList.add(new User("Elena", "Elenina", "elenina@gmail.com", "female", "30.12.2003", "IJKLM67890"));
         User user9 = new User();
         user9.setUserName("Lara");
         user9.setUserSurname("Larina");
@@ -96,23 +102,38 @@ public class Main {
         user9.setUserGender("female");
         user9.setUserBirthday("04.03.2000");
         user9.setPassportNumber("NOPQR54321");
+        userList.add(user9);
 
         Catalogue clothesForWoman = new Catalogue();
         clothesForWoman.setCatalogueName("allClothesForWoman");
-        Stream streamForProductList = productList.stream();
-        clothesForWoman.setCatalogueProducts((ArrayList<Product>) streamForProductList.filter(x->x.toString().contains("Woman's")).collect(Collectors.toList()));
+        List<Product> womanProducts = productList.stream().filter(product -> product.toString().contains("Woman's")).toList();
+        for (Product product : womanProducts) {product.setCatalogue(clothesForWoman);}
+        clothesForWoman.setCatalogueProducts(womanProducts);
 
         Catalogue clothesForMen = new Catalogue();
         clothesForMen.setCatalogueName("allClothesForMen");
-        Stream streamForProductList2 = productList.stream();
-        clothesForMen.setCatalogueProducts((ArrayList<Product>) streamForProductList2.filter(x->x.toString().contains("Men's")).collect(Collectors.toList()));
+        List<Product> menProducts = productList.stream().filter(product -> product.toString().contains("Men's")).toList();
+        for (Product product : menProducts) {product.setCatalogue(clothesForMen);}
+        clothesForMen.setCatalogueProducts(menProducts);
 
         Catalogue clothesForChildren = new Catalogue();
         clothesForChildren.setCatalogueName("allClothesForChildren");
-        Stream streamForProductList3 = productList.stream();
-        clothesForChildren.setCatalogueProducts((ArrayList<Product>) streamForProductList3.filter(x -> x.toString().contains("Children's")).collect(Collectors.toList()));
+        List<Product> childrenProducts = productList.stream().filter(product -> product.toString().contains("Children's")).toList();
+        for (Product product : childrenProducts) {product.setCatalogue(clothesForChildren);}
+        clothesForChildren.setCatalogueProducts(childrenProducts);
 
+        Collections.shuffle(productList);
+        Iterator<Product> productIterator = productList.iterator();
+        userList.forEach(user -> {
+            if (productIterator.hasNext()) {
+                Product product = productIterator.next();
+                Catalogue productCatalogue = product.getCatalogue();
+                System.out.println("User " + user.getUserId() + " " + user.getUserName() + " " + user.getUserSurname() +
+                        " положил в корзину товар с id=" + product.getProductId() + ", '" +
+                        product.getProductName() + "' из раздела каталога id=" + productCatalogue.getCatalogueId() +
+                        " \"" + productCatalogue.getCatalogueName() + "\".");
+            }
+        });
     }
 }
-
 
