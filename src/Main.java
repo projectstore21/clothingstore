@@ -99,8 +99,11 @@ public class Main {
         user9.setPassportNumber("NOPQR54321");
         userList.add(user9);
         Map<String, User> userMap = new HashMap<>();
-        for (int i =0; i<userList.size(); i++){
-            userMap.put(userList.get(i).getPassportNumber(),userList.get(i));
+        for (int i = 0; i < userList.size(); i++) {
+            userMap.put(userList.get(i).getPassportNumber(), userList.get(i));
+        }
+        for (Map.Entry<String, User> users : userMap.entrySet()) {
+            System.out.println(users);
         }
 
         List<Catalogue> catalogueList = new ArrayList<>();

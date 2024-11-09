@@ -142,7 +142,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id='" + getUserId() + '\'' +
+        return "User {" + "id='" + getUserId() + '\'' +
                 ", name='" + getUserName() + '\'' +
                 ", surname='" + getUserSurname() + '\'' +
                 ", mail='" + getUserEmail() + '\'' +
