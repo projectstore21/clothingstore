@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Main {
 
-    private static List<Product> productList = new ArrayList<>();
+    public static List<Product> productList = new ArrayList<>();
 
     public static void main(String[] args) {
         System.out.println("Welcome to our clothing store!");
@@ -69,6 +69,11 @@ public class Main {
         productList.add(new Product("Children's pijamas", 10.99, 4));
         productList.add(new Product("Children's shirts", 15.99, 12));
         productList.add(new Product("Children's mono", 16.99, 30));
+        createProduct("Men's valenki",55,55);
+        createProduct("Men's shapka",8,8);
+        readProduct(3);
+        updateProduct(1,"Men's varezhki", 9);
+        deleteProduct(2);
 
         List<User> userList = new ArrayList<>();
         userList.add(new User("Ivan", "Ivanov", "ivanov@mail.ru", "male", "15.02.1991", "1A2B3C4D5E"));
