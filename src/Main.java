@@ -127,7 +127,7 @@ public class Main {
         clothesForMen.setCatalogueProducts(menProducts);
         catalogueList.add(clothesForMen);
         Catalogue clothesForChildren = new Catalogue();
-        clothesForChildren.setCatalogueName("allClothesForChildren");
+        clothesForChildren.setCatalogueName("allClothesForChildren1");
         List<Product> childrenProducts = productList.stream().filter(product -> product.toString().contains("Children's")).toList();
         for (Product product : childrenProducts) {
             product.setCatalogue(clothesForChildren);
