@@ -1,3 +1,4 @@
+import javax.lang.model.element.Name;
 import java.util.*;
 
 public class Main {
@@ -146,5 +147,58 @@ public class Main {
             }
         });
     }
-}
 
+    private static final List<Product> productList = new ArrayList<>();
+
+    public static void createProduct(String productName, double price, int amountInStock) {
+        Product newProduct = new Product(productName, price, amountInStock);
+        productList.add(newProduct);
+        System.out.println("Товар " + newProduct.getProductName() + " был создан");
+    }
+
+    private static void readProduct(int productId) {
+        for (Product product : productList) {
+            if (product.getProductId() == productId) {
+                System.out.println("Товар " + product.getProductName() + " id=" + productId + " был найден");
+                return;
+            }
+        }
+        System.out.println("Товар с id=" + productId + " не найден");
+    }
+
+    public static void updateProduct(int productId, String newName, double newPrice) {
+        for (Product product : productList) {
+            if (product.getProductId() == productId) {
+                product.setProductName(newName);
+                product.setPrice(newPrice);
+                System.out.println("Товар с id=" + productId + " был обновлён");
+                return;
+            }
+        }
+        System.out.println("Товар с id=" + productId + " не найден");
+    }
+
+    public static void deleteProduct(int productId) {
+        Iterator<Product> iterator = productList.iterator();
+        while (iterator.hasNext()) {
+            Product product = iterator.next();
+            if (product.getProductId() == productId) {
+                iterator.remove();
+                System.out.println("Товар " + product.getProductName() + " был удален по id=" + productId);
+                return;
+            }
+        }
+        System.out.println("Товар с id=" + productId + " не найден");
+
+        createProduct("Перчатки", 40, 10);
+        createProduct("Носки", 8, 20);
+
+        readProduct(15);
+        readProduct(16);
+
+        updateProduct(33, "Пижама", 40);
+
+        deleteProduct(2);
+
+    }
+}
