@@ -200,5 +200,10 @@ public class Main {
 
         deleteProduct(2);
 
+        System.out.println("Все товары в списке:");
+        for (Product product : productList) {
+            System.out.println(product);
+        }
     }
 }
+
