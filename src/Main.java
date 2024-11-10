@@ -1,10 +1,9 @@
-import javax.lang.model.element.Name;
 import java.util.*;
 
 public class Main {
 
     public static List<Product> productList = new ArrayList<>();
-    public static Map<Integer, Catalogue> catalogueList = new HashMap<>();
+    public static Map<Integer, Catalogue> catalogueMap = new HashMap<>();
 
     public static void main(String[] args) {
         System.out.println("Welcome to our clothing store!");
@@ -122,7 +121,7 @@ public class Main {
             product.setCatalogue(clothesForWoman);
         }
         clothesForWoman.setCatalogueProducts(womanProducts);
-        catalogueList.put(clothesForWoman.getCatalogueId(), clothesForWoman);
+        catalogueMap.put(clothesForWoman.getCatalogueId(), clothesForWoman);
         Catalogue clothesForMen = new Catalogue();
         clothesForMen.setCatalogueName("allClothesForMen");
         List<Product> menProducts = productList.stream().filter(product -> product.toString().contains("Men's")).toList();
@@ -130,7 +129,7 @@ public class Main {
             product.setCatalogue(clothesForMen);
         }
         clothesForMen.setCatalogueProducts(menProducts);
-        catalogueList.put(clothesForMen.getCatalogueId(), clothesForMen);
+        catalogueMap.put(clothesForMen.getCatalogueId(), clothesForMen);
         Catalogue clothesForChildren = new Catalogue();
         clothesForChildren.setCatalogueName("allClothesForChildren12");
         List<Product> childrenProducts = productList.stream().filter(product -> product.toString().contains("Children's")).toList();
@@ -138,8 +137,8 @@ public class Main {
             product.setCatalogue(clothesForChildren);
         }
         clothesForChildren.setCatalogueProducts(childrenProducts);
-        catalogueList.put(clothesForChildren.getCatalogueId(), clothesForChildren);
-        catalogueList.entrySet().stream().forEach(catalogue -> System.out.println(catalogue));
+        catalogueMap.put(clothesForChildren.getCatalogueId(), clothesForChildren);
+        catalogueMap.entrySet().stream().forEach(catalogue -> System.out.println(catalogue));
 
         Collections.shuffle(productList);
         Iterator<Product> productIterator = productList.iterator();
