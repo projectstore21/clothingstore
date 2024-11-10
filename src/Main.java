@@ -1,10 +1,13 @@
+import javax.lang.model.element.Name;
 import java.util.*;
 
 public class Main {
+
+    public static List<Product> productList = new ArrayList<>();
+
     public static void main(String[] args) {
         System.out.println("Welcome to our clothing store!");
 
-        List<Product> productList = new ArrayList<>();
         productList.add(new Product("Men's shirt", 7.88, 5));
         productList.add(new Product("Men's jacket", 45, 8));
         productList.add(new Product("Men's pants", 15, 4));
@@ -66,6 +69,11 @@ public class Main {
         productList.add(new Product("Children's pijamas", 10.99, 4));
         productList.add(new Product("Children's shirts", 15.99, 12));
         productList.add(new Product("Children's mono", 16.99, 30));
+        createProduct("Men's valenki",55,55);
+        createProduct("Men's shapka",8,8);
+        readProduct(3);
+        updateProduct(1,"Men's varezhki", 9);
+        deleteProduct(2);
 
         List<User> userList = new ArrayList<>();
         userList.add(new User("Ivan", "Ivanov", "ivanov@mail.ru", "male", "15.02.1991", "1A2B3C4D5E"));
@@ -146,6 +154,47 @@ public class Main {
             }
         });
         System.out.println("sdfsadfsadfa");
+    }
+
+    public static void createProduct(String productName, double price, int amountInStock) {
+        Product newProduct = new Product(productName, price, amountInStock);
+        productList.add(newProduct);
+        System.out.println("Товар " + newProduct.getProductName() + " был создан");
+    }
+
+    private static void readProduct(int productId) {
+        for (Product product : productList) {
+            if (product.getProductId() == productId) {
+                System.out.println("Товар " + product.getProductName() + " id=" + productId + " был найден");
+                return;
+            }
+        }
+        System.out.println("Товар с id=" + productId + " не найден");
+    }
+
+    public static void updateProduct(int productId, String newName, double newPrice) {
+        for (Product product : productList) {
+            if (product.getProductId() == productId) {
+                product.setProductName(newName);
+                product.setPrice(newPrice);
+                System.out.println("Товар с id=" + productId + " был обновлён");
+                return;
+            }
+        }
+        System.out.println("Товар с id=" + productId + " не найден");
+    }
+
+    public static void deleteProduct(int productId) {
+        Iterator<Product> iterator = productList.iterator();
+        while (iterator.hasNext()) {
+            Product product = iterator.next();
+            if (product.getProductId() == productId) {
+                iterator.remove();
+                System.out.println("Товар " + product.getProductName() + " был удален по id=" + productId);
+                return;
+            }
+        }
+        System.out.println("Товар с id=" + productId + " не найден");
     }
 }
 
