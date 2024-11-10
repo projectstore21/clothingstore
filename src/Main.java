@@ -1,10 +1,13 @@
 import java.util.*;
 
 public class Main {
+
+    public static List<Product> productList = new ArrayList<>();
     public static void main(String[] args) {
         System.out.println("Welcome to our clothing store!");
+        productList.add(new Product("Men's shirt2", 7.88, 5));
+        productList.add(new Product("Men's jacket2", 45, 8));
 
-        List<Product> productList = new ArrayList<>();
         productList.add(new Product("Men's shirt", 7.88, 5));
         productList.add(new Product("Men's jacket", 45, 8));
         productList.add(new Product("Men's pants", 15, 4));
