@@ -2,10 +2,12 @@ import javax.lang.model.element.Name;
 import java.util.*;
 
 public class Main {
+
+    private static List<Product> productList = new ArrayList<>();
+
     public static void main(String[] args) {
         System.out.println("Welcome to our clothing store!");
 
-        List<Product> productList = new ArrayList<>();
         productList.add(new Product("Men's shirt", 7.88, 5));
         productList.add(new Product("Men's jacket", 45, 8));
         productList.add(new Product("Men's pants", 15, 4));
@@ -148,8 +150,6 @@ public class Main {
         });
     }
 
-    private static final List<Product> productList = new ArrayList<>();
-
     public static void createProduct(String productName, double price, int amountInStock) {
         Product newProduct = new Product(productName, price, amountInStock);
         productList.add(newProduct);
@@ -189,21 +189,6 @@ public class Main {
             }
         }
         System.out.println("Товар с id=" + productId + " не найден");
-
-        createProduct("Перчатки", 40, 10);
-        createProduct("Носки", 8, 20);
-
-        readProduct(15);
-        readProduct(16);
-
-        updateProduct(33, "Пижама", 40);
-
-        deleteProduct(2);
-
-        System.out.println("Все товары в списке:");
-        for (Product product : productList) {
-            System.out.println(product);
-        }
     }
 }
 
