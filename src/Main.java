@@ -126,14 +126,6 @@ public class Main {
         }
         clothesForMen.setCatalogueProducts(menProducts);
         catalogueList.add(clothesForMen);
-        Catalogue clothesForChildren = new Catalogue();
-        clothesForChildren.setCatalogueName("allClothesForChildren");
-        List<Product> childrenProducts = productList.stream().filter(product -> product.toString().contains("Children's")).toList();
-        for (Product product : childrenProducts) {
-            product.setCatalogue(clothesForChildren);
-        }
-        clothesForChildren.setCatalogueProducts(childrenProducts);
-        catalogueList.add(clothesForChildren);
         catalogueList.stream().forEach(catalogue -> System.out.println(catalogue));
 
         Collections.shuffle(productList);
