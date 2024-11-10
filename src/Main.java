@@ -146,6 +146,7 @@ public class Main {
                         " \"" + productCatalogue.getCatalogueName() + "\".");
             }
         });
+        System.out.println("sdfsadfsadfa");
     }
 }
 
