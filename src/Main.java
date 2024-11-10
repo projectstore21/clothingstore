@@ -124,7 +124,7 @@ public class Main {
         clothesForMen.setCatalogueProducts(menProducts);
         catalogueList.add(clothesForMen);
         Catalogue clothesForChildren = new Catalogue();
-        clothesForChildren.setCatalogueName("allClothesForChildren");
+        clothesForChildren.setCatalogueName("allClothesForChildren12");
         List<Product> childrenProducts = productList.stream().filter(product -> product.toString().contains("Children's")).toList();
         for (Product product : childrenProducts) {
             product.setCatalogue(clothesForChildren);
@@ -145,6 +145,7 @@ public class Main {
                         " \"" + productCatalogue.getCatalogueName() + "\".");
             }
         });
+        System.out.println("sdfsadfsadfa");
     }
 }
 
