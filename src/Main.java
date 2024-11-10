@@ -1,9 +1,9 @@
-import javax.lang.model.element.Name;
 import java.util.*;
 
 public class Main {
 
     public static List<Product> productList = new ArrayList<>();
+    public static Map<String, User> userMap = new HashMap<>();
 
     public static void main(String[] args) {
         System.out.println("Welcome to our clothing store!");
@@ -69,15 +69,14 @@ public class Main {
         productList.add(new Product("Children's pijamas", 10.99, 4));
         productList.add(new Product("Children's shirts", 15.99, 12));
         productList.add(new Product("Children's mono", 16.99, 30));
-        createProduct("Men's valenki",55,55);
-        createProduct("Men's shapka",8,8);
+        createProduct("Men's valenki", 55, 55);
+        createProduct("Men's shapka", 8, 8);
         readProduct(3);
-        updateProduct(1,"Men's varezhki", 9);
+        updateProduct(1, "Men's varezhki", 9);
         deleteProduct(2);
 
-        List<User> userList = new ArrayList<>();
-        userList.add(new User("Ivan", "Ivanov", "ivanov@mail.ru", "male", "15.02.1991", "1A2B3C4D5E"));
-        userList.add(new User("Petr", "Petrov", "petrov@mail.ru", "male", "13.08.2004", "12345ABCDE"));
+        userMap.put("1A2B3C4D5E", User.registerNewUser("Ivan", "Ivanov", "ivanov@mail.ru", "male", "15.02.1991", "1A2B3C4D5E"));
+        userMap.put("12345ABCDE", new User("Petr", "Petrov", "petrov@mail.ru", "male", "13.08.2004", "12345ABCDE"));
         User user3 = new User();
         user3.setUserName("Ira");
         user3.setUserSurname("Irinina");
@@ -85,9 +84,9 @@ public class Main {
         user3.setUserGender("female");
         user3.setUserBirthday("04.12.1987");
         user3.setPassportNumber("ABCDE12345");
-        userList.add(user3);
-        userList.add(new User("Eis", "Schneeman", "schneeman@gmail.com", "male", "23.12.2000", "78903C4D5E"));
-        userList.add(new User("Mark", "Rober", "rober@gmail.com", "male", "18.02.1977", "12345A1234"));
+        userMap.put(user3.getPassportNumber(), user3);
+        userMap.put("78903C4D5E", User.registerNewUser("Eis", "Schneeman", "schneeman@gmail.com", "male", "23.12.2000", "78903C4D5E"));
+        userMap.put("12345A1234", new User("Mark", "Rober", "rober@gmail.com", "male", "18.02.1977", "12345A1234"));
         User user6 = new User();
         user6.setUserName("Fabian");
         user6.setUserSurname("Huber");
@@ -95,9 +94,9 @@ public class Main {
         user6.setUserGender("female");
         user6.setUserBirthday("12.12.2000");
         user6.setPassportNumber("123456789W");
-        userList.add(user6);
-        userList.add(new User("Nikita", "Nikitin", "nikitin@gmail.xom", "male", "14.01.1993", "DEFGH12345"));
-        userList.add(new User("Elena", "Elenina", "elenina@gmail.com", "female", "30.12.2003", "IJKLM67890"));
+        userMap.put(user6.getPassportNumber(), user6);
+        userMap.put("DEFGH12345", User.registerNewUser("Nikita", "Nikitin", "nikitin@gmail.xom", "male", "14.01.1993", "DEFGH12345"));
+        userMap.put("IJKLM67890", new User("Elena", "Elenina", "elenina@gmail.com", "female", "30.12.2003", "IJKLM67890"));
         User user9 = new User();
         user9.setUserName("Lara");
         user9.setUserSurname("Larina");
@@ -105,11 +104,9 @@ public class Main {
         user9.setUserGender("female");
         user9.setUserBirthday("04.03.2000");
         user9.setPassportNumber("NOPQR54321");
-        userList.add(user9);
-        Map<String, User> userMap = new HashMap<>();
-        for (int i = 0; i < userList.size(); i++) {
-            userMap.put(userList.get(i).getPassportNumber(), userList.get(i));
-        }
+        userMap.put(user9.getPassportNumber(), user9);
+        createUser("Victoria", "Viki", "viki@gmail.com", "female", "23.05.2001", "12AB34CD56EF");
+        readUser("DEFGH12345");
         for (Map.Entry<String, User> users : userMap.entrySet()) {
             System.out.println(users);
         }
@@ -143,17 +140,16 @@ public class Main {
 
         Collections.shuffle(productList);
         Iterator<Product> productIterator = productList.iterator();
-        userList.forEach(user -> {
+        userMap.forEach((passportNumbers, users) -> {
             if (productIterator.hasNext()) {
                 Product product = productIterator.next();
                 Catalogue productCatalogue = product.getCatalogue();
-                System.out.println("User " + user.getUserId() + " " + user.getUserName() + " " + user.getUserSurname() +
-                        " положил в корзину товар с id=" + product.getProductId() + ", '" +
+                System.out.println("User id=" + userMap.get(passportNumbers).getUserId() + " " + userMap.get(passportNumbers).getUserName() + " " + userMap.get(passportNumbers).getUserSurname() +
+                        " положил в корзину товар с id=" + product.getProductId() + " '" +
                         product.getProductName() + "' из раздела каталога id=" + productCatalogue.getCatalogueId() +
                         " \"" + productCatalogue.getCatalogueName() + "\".");
             }
         });
-        System.out.println("sdfsadfsadfa");
     }
 
     public static void createProduct(String productName, double price, int amountInStock) {
@@ -195,6 +191,18 @@ public class Main {
             }
         }
         System.out.println("Товар с id=" + productId + " не найден");
+    }
+
+    public static void createUser(String userName, String userSurname, String userEmail, String userGender, String userBirthday, String passportNumber) {
+        User newUser = new User(userName, userSurname, userEmail, userGender, userBirthday, passportNumber);
+        userMap.put(newUser.getPassportNumber(), newUser);
+        System.out.println("User " + newUser.getUserName() + " id=" + newUser.getUserId() + " has been created.");
+    }
+
+    private static void readUser(String passportNumber) {
+        if (userMap.containsKey(passportNumber)) {
+            System.out.println(userMap.get(passportNumber));
+        } else System.out.println("User passportNumber=" + passportNumber + " not found.");
     }
 }
 

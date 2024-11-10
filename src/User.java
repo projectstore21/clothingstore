@@ -88,7 +88,6 @@ public class User {
             return null;
         }
         User user = new User(userName, userSurname, userEmail, userGender, userBirthday, passportNumber);
-        System.out.println("Create " + user);
         return user;
     }
 
