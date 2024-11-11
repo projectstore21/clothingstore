@@ -17,11 +17,13 @@ public class Catalogue {
         this.catalogueProducts = new ArrayList<>();
     }
 
-    public Catalogue(String catalogueName, ProductType catalogueProductType) {
+    public Catalogue(String catalogueName, ProductType catalogueProductType) throws ExistingProductTypeCatalogueException {
         this.catalogueId = ++uniqueCatalogueId;
         this.catalogueProducts = new ArrayList<>();
         this.catalogueName = catalogueName;
-        this.catalogueProductType = catalogueProductType;
+        if (!Main.catalogueMap.containsKey(catalogueProductType)) {
+            this.catalogueProductType = catalogueProductType;
+        } else throw new ExistingProductTypeCatalogueException("Каталог с этой категорией товаров уже существует.");
     }
 
     public void setCatalogueProductType(ProductType catalogueProductType) throws ExistingProductTypeCatalogueException {

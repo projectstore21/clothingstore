@@ -1,3 +1,4 @@
+import Exceptions.ExistingProductTypeCatalogueException;
 import Exceptions.ProductNotFoundException;
 
 import java.util.*;
@@ -9,7 +10,7 @@ public class Main {
     public static Map<String, User> userMap = new HashMap<>();
     public static Map<ProductType, Catalogue> catalogueMap = new HashMap<>();
 
-    public static void main(String[] args) throws ProductNotFoundException {
+    public static void main(String[] args) throws ProductNotFoundException, ExistingProductTypeCatalogueException {
         System.out.println("Welcome to our clothing store!");
 
         productList.add(new Product("Men's shirt", 7.88, 5));
@@ -215,7 +216,7 @@ public class Main {
         } else System.out.println("User passportNumber=" + passportNumber + " not found.");
     }
 
-    public static void createCatalogue (String catalogueName, ProductType productType) {
+    public static void createCatalogue (String catalogueName, ProductType productType) throws ExistingProductTypeCatalogueException {
         Catalogue newCatalogue = new Catalogue(catalogueName, productType);
         if (!catalogueMap.containsKey(newCatalogue.getCatalogueProductType())) {
             catalogueMap.put(newCatalogue.getCatalogueProductType(), newCatalogue);
