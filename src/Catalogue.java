@@ -9,16 +9,22 @@ public class Catalogue {
     private final int catalogueId;
     private String catalogueName;
     private List<Product> catalogueProducts;
+    private ProductType catalogueProductType;
 
     public Catalogue() {
         this.catalogueId = ++uniqueCatalogueId;
         this.catalogueProducts = new ArrayList<>();
     }
 
-    public Catalogue(String catalogueName, ArrayList<Product> catalogueProducts) {
+    public Catalogue(String catalogueName, ProductType catalogueProductType) {
         this.catalogueId = ++uniqueCatalogueId;
+        this.catalogueProducts = new ArrayList<>();
         this.catalogueName = catalogueName;
-        this.catalogueProducts = catalogueProducts;
+        this.catalogueProductType = catalogueProductType;
+    }
+
+    public void setCatalogueProductType(ProductType catalogueProductType) {
+        this.catalogueProductType = catalogueProductType;
     }
 
     public void setCatalogueName(String catalogueName) {
@@ -47,6 +53,10 @@ public class Catalogue {
 
     public List<Product> getCatalogueProducts() {
         return catalogueProducts;
+    }
+
+    public ProductType getCatalogueProductType() {
+        return catalogueProductType;
     }
 
     @Override
