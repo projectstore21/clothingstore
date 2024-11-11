@@ -1,3 +1,4 @@
+import Exceptions.ExistingProductTypeCatalogueException;
 import Exceptions.ProductNotFoundException;
 
 import java.util.ArrayList;
@@ -23,8 +24,10 @@ public class Catalogue {
         this.catalogueProductType = catalogueProductType;
     }
 
-    public void setCatalogueProductType(ProductType catalogueProductType) {
-        this.catalogueProductType = catalogueProductType;
+    public void setCatalogueProductType(ProductType catalogueProductType) throws ExistingProductTypeCatalogueException {
+        if (!Main.catalogueMap.containsKey(catalogueProductType)) {
+            this.catalogueProductType = catalogueProductType;
+        } else throw new ExistingProductTypeCatalogueException("Каталог с этой категорией товаров уже существует.");
     }
 
     public void setCatalogueName(String catalogueName) {
