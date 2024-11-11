@@ -45,6 +45,10 @@ public class Catalogue {
         return catalogueName;
     }
 
+    public List<Product> getCatalogueProducts() {
+        return catalogueProducts;
+    }
+
     @Override
     public String toString() {
         return "Catalogue Id: " + catalogueId +
