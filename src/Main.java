@@ -112,10 +112,11 @@ public class Main {
         createUser("Elena", "Elenina", "elenina@gmail.com", "female", "30.12.2003", "IJKLM67890");
         readUser("DEFGH12345");
         readUser("DEFGH12346");
+        updateUser("Nikita", "Nikitin", "nikitin@gmail.xom", "male", "14.01.1993", "DEFGH12345");
         updateUser("Mark", "Smith", "rober@gmail.com", "male", "18.02.1978", "12345A1234");
         updateUser("Mark", "Smith", "rober@gmail.com", "male", "18.02.1978", "12345A1235");
         deleteUser("1A2B3C4D5E");
-        deleteUser("1A2B3C4D5P");
+        deleteUser("1A2B3C4D5E");
         System.out.println("\nПользователи:");
         for (Map.Entry<String, User> users : userMap.entrySet()) {
             System.out.println(users);
@@ -222,25 +223,29 @@ public class Main {
 
     public static void updateUser(String userName, String userSurname, String userEmail, String userGender, String userBirthday, String passportNumber) {
         if (userMap.containsKey(passportNumber)) {
-            if (!userMap.get(passportNumber).getUserName().equals(userName)) {
-                userMap.get(passportNumber).setUserName(userName);
-                System.out.println("For user " + userMap.get(passportNumber).getUserName() + " passportNumber=" + passportNumber + " name has been update: " + userMap.get(passportNumber).getUserName() + ".");
-            }
-            if (!userMap.get(passportNumber).getUserSurname().equals(userSurname)) {
-                userMap.get(passportNumber).setUserSurname(userSurname);
-                System.out.println("For user " + userMap.get(passportNumber).getUserName() + " passportNumber=" + passportNumber + " surname has been update: " + userMap.get(passportNumber).getUserSurname() + ".");
-            }
-            if (!userMap.get(passportNumber).getUserEmail().equals(userEmail)) {
-                userMap.get(passportNumber).setUserEmail(userEmail);
-                System.out.println("For user " + userMap.get(passportNumber).getUserName() + " passportNumber=" + passportNumber + " email has been update: " + userMap.get(passportNumber).getUserEmail() + ".");
-            }
-            if (!userMap.get(passportNumber).getUserGender().equals(userGender)) {
-                userMap.get(passportNumber).setUserGender(userGender);
-                System.out.println("For user " + userMap.get(passportNumber).getUserName() + " passportNumber=" + passportNumber + " gender has been update: " + userMap.get(passportNumber).getUserGender() + ".");
-            }
-            if (!userMap.get(passportNumber).getUserBirthday().equals(userBirthday)) {
-                userMap.get(passportNumber).setUserBirthday(userBirthday);
-                System.out.println("For user " + userMap.get(passportNumber).getUserName() + " passportNumber=" + passportNumber + " B-day has been update: " + userMap.get(passportNumber).getUserBirthday() + ".");
+            if (userMap.get(passportNumber).getUserName().equals(userName) && userMap.get(passportNumber).getUserSurname().equals(userSurname) && userMap.get(passportNumber).getUserEmail().equals(userEmail) && userMap.get(passportNumber).getUserGender().equals(userGender) && userMap.get(passportNumber).getUserBirthday().equals(userBirthday)) {
+                System.out.println("For user " + userMap.get(passportNumber).getUserName() + " passportNumber=" + passportNumber + " data hasn't been updated. You entered the same data.");
+            } else {
+                if (!userMap.get(passportNumber).getUserName().equals(userName)) {
+                    userMap.get(passportNumber).setUserName(userName);
+                    System.out.println("For user " + userMap.get(passportNumber).getUserName() + " passportNumber=" + passportNumber + " name has been updated: " + userMap.get(passportNumber).getUserName() + ".");
+                }
+                if (!userMap.get(passportNumber).getUserSurname().equals(userSurname)) {
+                    userMap.get(passportNumber).setUserSurname(userSurname);
+                    System.out.println("For user " + userMap.get(passportNumber).getUserName() + " passportNumber=" + passportNumber + " surname has been updated: " + userMap.get(passportNumber).getUserSurname() + ".");
+                }
+                if (!userMap.get(passportNumber).getUserEmail().equals(userEmail)) {
+                    userMap.get(passportNumber).setUserEmail(userEmail);
+                    System.out.println("For user " + userMap.get(passportNumber).getUserName() + " passportNumber=" + passportNumber + " email has been updated: " + userMap.get(passportNumber).getUserEmail() + ".");
+                }
+                if (!userMap.get(passportNumber).getUserGender().equals(userGender)) {
+                    userMap.get(passportNumber).setUserGender(userGender);
+                    System.out.println("For user " + userMap.get(passportNumber).getUserName() + " passportNumber=" + passportNumber + " gender has been updated: " + userMap.get(passportNumber).getUserGender() + ".");
+                }
+                if (!userMap.get(passportNumber).getUserBirthday().equals(userBirthday)) {
+                    userMap.get(passportNumber).setUserBirthday(userBirthday);
+                    System.out.println("For user " + userMap.get(passportNumber).getUserName() + " passportNumber=" + passportNumber + " B-day has been updated: " + userMap.get(passportNumber).getUserBirthday() + ".");
+                }
             }
         } else System.out.println("Error. User passportNumber=" + passportNumber + " is not found.");
     }
