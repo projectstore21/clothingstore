@@ -70,6 +70,7 @@ public class Main {
         productList.add(new Product("Children's pijamas", 10.99, 4));
         productList.add(new Product("Children's shirts", 15.99, 12));
         productList.add(new Product("Children's mono", 16.99, 30));
+        System.out.println("\nМетоды CRUD для класса Товар:");
         createProduct("Men's valenki", 55, 55);
         createProduct("Men's shapka", 8, 8);
         readProduct(3);
@@ -106,8 +107,16 @@ public class Main {
         user9.setUserBirthday("04.03.2000");
         user9.setPassportNumber("NOPQR54321");
         userMap.put(user9.getPassportNumber(), user9);
+        System.out.println("\nМетоды CRUD для класса Пользователь:");
         createUser("Victoria", "Viki", "viki@gmail.com", "female", "23.05.2001", "12AB34CD56EF");
+        createUser("Elena", "Elenina", "elenina@gmail.com", "female", "30.12.2003", "IJKLM67890");
         readUser("DEFGH12345");
+        readUser("DEFGH12346");
+        updateUser("Mark", "Smith", "rober@gmail.com", "male", "18.02.1978", "12345A1234");
+        updateUser("Mark", "Smith", "rober@gmail.com", "male", "18.02.1978", "12345A1235");
+        deleteUser("1A2B3C4D5E");
+        deleteUser("1A2B3C4D5P");
+        System.out.println("\nПользователи:");
         for (Map.Entry<String, User> users : userMap.entrySet()) {
             System.out.println(users);
         }
@@ -129,15 +138,17 @@ public class Main {
         clothesForMen.setCatalogueProducts(menProducts);
         catalogueMap.put(clothesForMen.getCatalogueId(), clothesForMen);
         Catalogue clothesForChildren = new Catalogue();
-        clothesForChildren.setCatalogueName("allClothesForChildren12");
+        clothesForChildren.setCatalogueName("allClothesForChildren");
         List<Product> childrenProducts = productList.stream().filter(product -> product.toString().contains("Children's")).toList();
         for (Product product : childrenProducts) {
             product.setCatalogue(clothesForChildren);
         }
         clothesForChildren.setCatalogueProducts(childrenProducts);
         catalogueMap.put(clothesForChildren.getCatalogueId(), clothesForChildren);
+        System.out.println("\nКаталоги:");
         catalogueMap.entrySet().stream().forEach(catalogue -> System.out.println(catalogue));
 
+        System.out.println("\nПокупки:");
         Collections.shuffle(productList);
         Iterator<Product> productIterator = productList.iterator();
         userMap.forEach((passportNumbers, users) -> {
@@ -195,14 +206,50 @@ public class Main {
 
     public static void createUser(String userName, String userSurname, String userEmail, String userGender, String userBirthday, String passportNumber) {
         User newUser = new User(userName, userSurname, userEmail, userGender, userBirthday, passportNumber);
-        userMap.put(newUser.getPassportNumber(), newUser);
-        System.out.println("User " + newUser.getUserName() + " id=" + newUser.getUserId() + " has been created.");
+        if (userMap.containsKey(passportNumber)) {
+            System.out.println("Error. User " + newUser.getUserName() + " passportNumber=" + newUser.getPassportNumber() + " already exists. ");
+        } else {
+            userMap.put(newUser.getPassportNumber(), newUser);
+            System.out.println("User " + newUser.getUserName() + " passportNumber=" + newUser.getPassportNumber() + " has been created.");
+        }
     }
 
-    private static void readUser(String passportNumber) {
+    public static void readUser(String passportNumber) {
         if (userMap.containsKey(passportNumber)) {
-            System.out.println(userMap.get(passportNumber));
-        } else System.out.println("User passportNumber=" + passportNumber + " not found.");
+            System.out.println("User " + userMap.get(passportNumber).getUserName() + " passportNumber=" + passportNumber + " is found: " + userMap.get(passportNumber));
+        } else System.out.println("Error. User passportNumber=" + passportNumber + " is not found.");
+    }
+
+    public static void updateUser(String userName, String userSurname, String userEmail, String userGender, String userBirthday, String passportNumber) {
+        if (userMap.containsKey(passportNumber)) {
+            if (!userMap.get(passportNumber).getUserName().equals(userName)) {
+                userMap.get(passportNumber).setUserName(userName);
+                System.out.println("For user " + userMap.get(passportNumber).getUserName() + " passportNumber=" + passportNumber + " name has been update: " + userMap.get(passportNumber).getUserName() + ".");
+            }
+            if (!userMap.get(passportNumber).getUserSurname().equals(userSurname)) {
+                userMap.get(passportNumber).setUserSurname(userSurname);
+                System.out.println("For user " + userMap.get(passportNumber).getUserName() + " passportNumber=" + passportNumber + " surname has been update: " + userMap.get(passportNumber).getUserSurname() + ".");
+            }
+            if (!userMap.get(passportNumber).getUserEmail().equals(userEmail)) {
+                userMap.get(passportNumber).setUserEmail(userEmail);
+                System.out.println("For user " + userMap.get(passportNumber).getUserName() + " passportNumber=" + passportNumber + " email has been update: " + userMap.get(passportNumber).getUserEmail() + ".");
+            }
+            if (!userMap.get(passportNumber).getUserGender().equals(userGender)) {
+                userMap.get(passportNumber).setUserGender(userGender);
+                System.out.println("For user " + userMap.get(passportNumber).getUserName() + " passportNumber=" + passportNumber + " gender has been update: " + userMap.get(passportNumber).getUserGender() + ".");
+            }
+            if (!userMap.get(passportNumber).getUserBirthday().equals(userBirthday)) {
+                userMap.get(passportNumber).setUserBirthday(userBirthday);
+                System.out.println("For user " + userMap.get(passportNumber).getUserName() + " passportNumber=" + passportNumber + " B-day has been update: " + userMap.get(passportNumber).getUserBirthday() + ".");
+            }
+        } else System.out.println("Error. User passportNumber=" + passportNumber + " is not found.");
+    }
+
+    public static void deleteUser(String passportNumber) {
+        if (userMap.containsKey(passportNumber)) {
+            userMap.remove(passportNumber);
+            System.out.println("User passportNumber=" + passportNumber + " has been removed.");
+        } else System.out.println("Error. User passportNumber=" + passportNumber + " is not found.");
     }
 }
 
