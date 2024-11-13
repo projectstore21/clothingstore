@@ -1,0 +1,9 @@
+12345ABCDE=User {id='2', name='Petr', surname='Petrov', mail='petrov@mail.ru', gender='male', B-day='13.08.2004', passport='12345ABCDE'}
+IJKLM67890=User {id='8', name='Elena', surname='Elenina', mail='elenina@gmail.com', gender='female', B-day='30.12.2003', passport='IJKLM67890'}
+78903C4D5E=User {id='4', name='Eis', surname='Schneeman', mail='schneeman@gmail.com', gender='male', B-day='23.12.2000', passport='78903C4D5E'}
+NOPQR54321=User {id='9', name='Lara', surname='Larina', mail='larina@gmail.com', gender='female', B-day='04.03.2000', passport='NOPQR54321'}
+12AB34CD56EF=User {id='10', name='Victoria', surname='Viki', mail='viki@gmail.com', gender='female', B-day='23.05.2001', passport='12AB34CD56EF'}
+12345A1234=User {id='5', name='Mark', surname='Smith', mail='rober@gmail.com', gender='male', B-day='18.02.1978', passport='12345A1234'}
+ABCDE12345=User {id='3', name='Ira', surname='Irinina', mail='irinina@mail.ru', gender='female', B-day='04.12.1987', passport='ABCDE12345'}
+DEFGH12345=User {id='7', name='Nikita', surname='Nikitin', mail='nikitin@gmail.xom', gender='male', B-day='14.01.1993', passport='DEFGH12345'}
+123456789W=User {id='6', name='Fabian', surname='Huber', mail='huber@gmail.com', gender='female', B-day='12.12.2000', passport='123456789W'}
