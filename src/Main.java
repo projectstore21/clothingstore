@@ -119,7 +119,8 @@ public class Main {
         Catalogue clothesForWoman = new Catalogue();
         clothesForWoman.setCatalogueName("allClothesForWoman");
         clothesForWoman.setCatalogueProductType(ProductType.WOMAN);
-        List<Product> womanProducts = productList.stream().filter(product -> product.toString().contains("Woman's")).collect(Collectors.toCollection(ArrayList::new));
+        List<Product> womanProducts = productList.stream().filter(product -> product.toString().contains("Woman's"))
+                .collect(Collectors.toCollection(ArrayList::new));
         for (Product product : womanProducts) {
             product.setCatalogue(clothesForWoman);
         }
@@ -128,14 +129,16 @@ public class Main {
         Catalogue clothesForMen = new Catalogue();
         clothesForMen.setCatalogueName("allClothesForMen");
         clothesForMen.setCatalogueProductType(ProductType.MEN);
-        List<Product> menProducts = productList.stream().filter(product -> product.toString().contains("Men's")).collect(Collectors.toCollection(ArrayList::new));
+        List<Product> menProducts = productList.stream().filter(product -> product.toString().contains("Men's"))
+                .collect(Collectors.toCollection(ArrayList::new));
         for (Product product : menProducts) {
             product.setCatalogue(clothesForMen);
         }
         clothesForMen.setCatalogueProducts(menProducts);
         catalogueMap.put(clothesForMen.getCatalogueProductType(), clothesForMen);
         Catalogue clothesForChildren = new Catalogue("allClothesForChildren", ProductType.CHILDREN);
-        List<Product> childrenProducts = productList.stream().filter(product -> product.toString().contains("Children's")).collect(Collectors.toCollection(ArrayList::new));
+        List<Product> childrenProducts = productList.stream().filter(product -> product.toString().contains("Children's"))
+                .collect(Collectors.toCollection(ArrayList::new));
         for (Product product : childrenProducts) {
             product.setCatalogue(clothesForChildren);
         }
@@ -220,7 +223,7 @@ public class Main {
         Catalogue newCatalogue = new Catalogue(catalogueName, productType);
         if (!catalogueMap.containsKey(newCatalogue.getCatalogueProductType())) {
             catalogueMap.put(newCatalogue.getCatalogueProductType(), newCatalogue);
-            System.out.println("Навый каталог " + newCatalogue.getCatalogueName() + " c id: " + newCatalogue.getCatalogueId() +  " был создан.");
+            System.out.println("Новый каталог " + newCatalogue.getCatalogueName() + " c id: " + newCatalogue.getCatalogueId() +  " был создан.");
         } else {System.out.println("Каталог с товарами категории " + productType + " уже существует.");}
     }
 
@@ -251,15 +254,15 @@ public class Main {
             switch (catalogueProductType) {
                 case MEN -> currentProducts = productList.stream()
                         .filter(product -> product.getProductName().contains("Men's"))
-                        .collect(Collectors.toList());
+                        .collect(Collectors.toCollection(ArrayList::new));
 
                 case WOMAN -> currentProducts = productList.stream()
                         .filter(product -> product.getProductName().contains("Woman's"))
-                        .collect(Collectors.toList());
+                        .collect(Collectors.toCollection(ArrayList::new));
 
                 case CHILDREN -> currentProducts = productList.stream()
                         .filter(product -> product.getProductName().contains("Children's"))
-                        .collect(Collectors.toList());
+                        .collect(Collectors.toCollection(ArrayList::new));
 
                 default -> {
                     System.out.println("Каталог с товарами категории " + catalogueProductType + " не найден.");
@@ -271,19 +274,17 @@ public class Main {
             System.out.println("Текущее кол-во товаров в каталоге " + currentCatalogue.getCatalogueName() + " с id: "
                     + currentCatalogue.getCatalogueId() + ": " + currentCatalogueLength);
 
-            if (currentProducts.size() > currentCatalogueLength) {
-                for (int i = currentCatalogueLength; i < currentProducts.size(); i++) {
-                    Product newProduct = currentProducts.get(i);
-                    currentCatalogue.addProductToCatalogue(newProduct);
-                    System.out.println("Product " + newProduct.getProductName() +
-                            " с id: " + newProduct.getProductId() +
-                            " был добавлен в каталог " + currentCatalogue.getCatalogueName()
-                            + " с id: " + currentCatalogue.getCatalogueId() + ".");
-                }
-            } else {
-                System.out.println("На склад не поступали новые товары для каталога "
-                        + currentCatalogue.getCatalogueName() + " с id: " + currentCatalogue.getCatalogueId() + ".");
+
+            Set<Product> currentProductsSet = new HashSet<>(currentProducts);
+            Set<Product> currentProductsInCatalogueSet = new HashSet<>(currentCatalogue.getCatalogueProducts());
+
+            if (!currentProductsSet.equals(currentProductsInCatalogueSet)) {
+                currentCatalogue.setCatalogueProducts(currentProducts);
+                System.out.println("При обновлении в каталог " +currentCatalogue.getCatalogueName() + " с id: " + currentCatalogue.getCatalogueId() + " были добавлены новые товары.");
+            } else {System.out.println("На склад не поступали новые товары для каталога "
+                    + currentCatalogue.getCatalogueName() + " с id: " + currentCatalogue.getCatalogueId() + ".");
             }
+
         } else {System.out.println("Каталог с товарами типа " + catalogueProductType + " не был найден.");}
     }
 
