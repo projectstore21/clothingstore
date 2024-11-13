@@ -1,6 +1,10 @@
 import Exceptions.ExistingProductTypeCatalogueException;
 import Exceptions.ProductNotFoundException;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -185,6 +189,19 @@ public class Main {
 
         System.out.println("\nСчитывание товаров из списка товаров в файл:");
         fileCopy.writeProductsToFile();
+
+        System.out.println("\nСчитывание пользователей из коллекции в файл:");
+        File usersFile = new File("users.txt");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(usersFile))) {
+            for (Map.Entry<String, User> user : userMap.entrySet()) {
+                writer.write(user.toString());
+                writer.newLine();
+            }
+            System.out.println("Пользователи из списка пользователей были успешно записаны в файл.");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public static void createProduct(String productName, double price, int amountInStock) {
