@@ -1,12 +1,16 @@
+import Exceptions.ExistingProductTypeCatalogueException;
+import Exceptions.ProductNotFoundException;
+
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
 
     public static List<Product> productList = new ArrayList<>();
     public static Map<String, User> userMap = new HashMap<>();
-    public static Map<Integer, Catalogue> catalogueMap = new HashMap<>();
+    public static Map<ProductType, Catalogue> catalogueMap = new HashMap<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ProductNotFoundException, ExistingProductTypeCatalogueException {
         System.out.println("Welcome to our clothing store!");
 
         productList.add(new Product("Men's shirt", 7.88, 5));
@@ -61,9 +65,9 @@ public class Main {
         product35.setAmountInStock(3);
         productList.add(product35);
         productList.add(new Product("Children's socks", 5, 15));
-        productList.add(new Product("Children's skirt", 10.50, 20));
+        productList.add(new Product("Children's skirt", 10.50, 7));
         productList.add(new Product("Children's trousers", 15, 10));
-        productList.add(new Product("Children's jacket", 50, 5));
+        productList.add(new Product("Children's jacket", 50, 10));
         productList.add(new Product("Children's dress", 35, 11));
         productList.add(new Product("Children's longsleeve", 16, 35));
         productList.add(new Product("Children's jumper", 13.50, 17));
@@ -124,28 +128,32 @@ public class Main {
 
         Catalogue clothesForWoman = new Catalogue();
         clothesForWoman.setCatalogueName("allClothesForWoman");
-        List<Product> womanProducts = productList.stream().filter(product -> product.toString().contains("Woman's")).toList();
+        clothesForWoman.setCatalogueProductType(ProductType.WOMAN);
+        List<Product> womanProducts = productList.stream().filter(product -> product.toString().contains("Woman's"))
+                .collect(Collectors.toCollection(ArrayList::new));
         for (Product product : womanProducts) {
             product.setCatalogue(clothesForWoman);
         }
         clothesForWoman.setCatalogueProducts(womanProducts);
-        catalogueMap.put(clothesForWoman.getCatalogueId(), clothesForWoman);
+        catalogueMap.put(clothesForWoman.getCatalogueProductType(), clothesForWoman);
         Catalogue clothesForMen = new Catalogue();
         clothesForMen.setCatalogueName("allClothesForMen");
-        List<Product> menProducts = productList.stream().filter(product -> product.toString().contains("Men's")).toList();
+        clothesForMen.setCatalogueProductType(ProductType.MEN);
+        List<Product> menProducts = productList.stream().filter(product -> product.toString().contains("Men's"))
+                .collect(Collectors.toCollection(ArrayList::new));
         for (Product product : menProducts) {
             product.setCatalogue(clothesForMen);
         }
         clothesForMen.setCatalogueProducts(menProducts);
-        catalogueMap.put(clothesForMen.getCatalogueId(), clothesForMen);
-        Catalogue clothesForChildren = new Catalogue();
-        clothesForChildren.setCatalogueName("allClothesForChildren");
-        List<Product> childrenProducts = productList.stream().filter(product -> product.toString().contains("Children's")).toList();
+        catalogueMap.put(clothesForMen.getCatalogueProductType(), clothesForMen);
+        Catalogue clothesForChildren = new Catalogue("allClothesForChildren", ProductType.CHILDREN);
+        List<Product> childrenProducts = productList.stream().filter(product -> product.toString().contains("Children's"))
+                .collect(Collectors.toCollection(ArrayList::new));
         for (Product product : childrenProducts) {
             product.setCatalogue(clothesForChildren);
         }
         clothesForChildren.setCatalogueProducts(childrenProducts);
-        catalogueMap.put(clothesForChildren.getCatalogueId(), clothesForChildren);
+        catalogueMap.put(clothesForChildren.getCatalogueProductType(), clothesForChildren);
         System.out.println("\nКаталоги:");
         catalogueMap.entrySet().stream().forEach(catalogue -> System.out.println(catalogue));
 
@@ -162,6 +170,13 @@ public class Main {
                         " \"" + productCatalogue.getCatalogueName() + "\".");
             }
         });
+
+        System.out.println("\nМетоды CRUD для класса Каталог:");
+        createCatalogue("Swimwear", ProductType.SWIMWEAR);
+        readCatalogue(ProductType.MEN);
+        createProduct("Children's leggins", 3, 20);
+        updateCatalogue(ProductType.CHILDREN);
+        deleteCatalogue(ProductType.SWIMWEAR);
     }
 
     public static void createProduct(String productName, double price, int amountInStock) {
@@ -255,6 +270,83 @@ public class Main {
             userMap.remove(passportNumber);
             System.out.println("User passportNumber=" + passportNumber + " has been removed.");
         } else System.out.println("Error. User passportNumber=" + passportNumber + " is not found.");
+    }
+
+    public static void createCatalogue (String catalogueName, ProductType productType) throws ExistingProductTypeCatalogueException {
+        Catalogue newCatalogue = new Catalogue(catalogueName, productType);
+        if (!catalogueMap.containsKey(newCatalogue.getCatalogueProductType())) {
+            catalogueMap.put(newCatalogue.getCatalogueProductType(), newCatalogue);
+            System.out.println("Новый каталог " + newCatalogue.getCatalogueName() + " c id: " + newCatalogue.getCatalogueId() +  " был создан.");
+        } else {System.out.println("Каталог с товарами категории " + productType + " уже существует.");}
+    }
+
+    private static void readCatalogue (ProductType catalogueProductType) {
+        if (catalogueMap.containsKey(catalogueProductType)) {
+            System.out.println(catalogueMap.get(catalogueProductType));
+        } else {System.out.println("Каталог с товарами категории " + catalogueMap.get(catalogueProductType).getCatalogueProductType() + " не был найден.");}
+    }
+
+    public static void updateCatalogue (ProductType catalogueProductType) throws ProductNotFoundException {
+        if (catalogueMap.containsKey(catalogueProductType)) {
+            Catalogue currentCatalogue = catalogueMap.get(catalogueProductType);
+            int currentCatalogueLength = currentCatalogue.getCatalogueProducts().size();
+            List<Product> currentProducts;
+            Iterator<Product> iterator = currentCatalogue.getCatalogueProducts().iterator();
+
+            while (iterator.hasNext()) {
+                Product product = iterator.next();
+                if (product.getAmountInStock() <= 0) {
+                    iterator.remove();
+                    System.out.println("Товар " + product.getProductName() + " с id: " + product.getProductId()
+                            + " закончился и был удален из каталога " + currentCatalogue.getCatalogueName()
+                            + " c id:" + currentCatalogue.getCatalogueId());
+                    return;
+                }
+            }
+
+            switch (catalogueProductType) {
+                case MEN -> currentProducts = productList.stream()
+                        .filter(product -> product.getProductName().contains("Men's"))
+                        .collect(Collectors.toCollection(ArrayList::new));
+
+                case WOMAN -> currentProducts = productList.stream()
+                        .filter(product -> product.getProductName().contains("Woman's"))
+                        .collect(Collectors.toCollection(ArrayList::new));
+
+                case CHILDREN -> currentProducts = productList.stream()
+                        .filter(product -> product.getProductName().contains("Children's"))
+                        .collect(Collectors.toCollection(ArrayList::new));
+
+                default -> {
+                    System.out.println("Каталог с товарами категории " + catalogueProductType + " не найден.");
+                    return;
+                }
+            }
+
+            System.out.println("Текущее кол-во товаров категории " + currentCatalogue.getCatalogueName() + ": " + currentProducts.size());
+            System.out.println("Текущее кол-во товаров в каталоге " + currentCatalogue.getCatalogueName() + " с id: "
+                    + currentCatalogue.getCatalogueId() + ": " + currentCatalogueLength);
+
+
+            Set<Product> currentProductsSet = new HashSet<>(currentProducts);
+            Set<Product> currentProductsInCatalogueSet = new HashSet<>(currentCatalogue.getCatalogueProducts());
+
+            if (!currentProductsSet.equals(currentProductsInCatalogueSet)) {
+                currentCatalogue.setCatalogueProducts(currentProducts);
+                System.out.println("При обновлении в каталог " +currentCatalogue.getCatalogueName() + " с id: " + currentCatalogue.getCatalogueId() + " были добавлены новые товары.");
+            } else {System.out.println("На склад не поступали новые товары для каталога "
+                    + currentCatalogue.getCatalogueName() + " с id: " + currentCatalogue.getCatalogueId() + ".");
+            }
+
+        } else {System.out.println("Каталог с товарами типа " + catalogueProductType + " не был найден.");}
+    }
+
+
+    public static void deleteCatalogue (ProductType catalogueProductType) {
+        if (catalogueMap.containsKey(catalogueProductType)) {
+            catalogueMap.remove(catalogueProductType);
+            System.out.println("Каталог с товарами типа " + catalogueProductType + " был удален.");
+        } else {System.out.println("Каталог с товарами типа " + catalogueProductType + " не был найден.");}
     }
 }
 

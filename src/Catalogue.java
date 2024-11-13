@@ -1,3 +1,4 @@
+import Exceptions.ExistingProductTypeCatalogueException;
 import Exceptions.ProductNotFoundException;
 
 import java.util.ArrayList;
@@ -9,16 +10,26 @@ public class Catalogue {
     private final int catalogueId;
     private String catalogueName;
     private List<Product> catalogueProducts;
+    private ProductType catalogueProductType;
 
     public Catalogue() {
         this.catalogueId = ++uniqueCatalogueId;
         this.catalogueProducts = new ArrayList<>();
     }
 
-    public Catalogue(String catalogueName, ArrayList<Product> catalogueProducts) {
+    public Catalogue(String catalogueName, ProductType catalogueProductType) throws ExistingProductTypeCatalogueException {
         this.catalogueId = ++uniqueCatalogueId;
+        this.catalogueProducts = new ArrayList<>();
         this.catalogueName = catalogueName;
-        this.catalogueProducts = catalogueProducts;
+        if (!Main.catalogueMap.containsKey(catalogueProductType)) {
+            this.catalogueProductType = catalogueProductType;
+        } else throw new ExistingProductTypeCatalogueException("Каталог с этой категорией товаров уже существует.");
+    }
+
+    public void setCatalogueProductType(ProductType catalogueProductType) throws ExistingProductTypeCatalogueException {
+        if (!Main.catalogueMap.containsKey(catalogueProductType)) {
+            this.catalogueProductType = catalogueProductType;
+        } else throw new ExistingProductTypeCatalogueException("Каталог с этой категорией товаров уже существует.");
     }
 
     public void setCatalogueName(String catalogueName) {
@@ -43,6 +54,14 @@ public class Catalogue {
 
     public String getCatalogueName() {
         return catalogueName;
+    }
+
+    public List<Product> getCatalogueProducts() {
+        return catalogueProducts;
+    }
+
+    public ProductType getCatalogueProductType() {
+        return catalogueProductType;
     }
 
     @Override
