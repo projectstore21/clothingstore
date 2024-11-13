@@ -177,6 +177,14 @@ public class Main {
         createProduct("Children's leggins", 3, 20);
         updateCatalogue(ProductType.CHILDREN);
         deleteCatalogue(ProductType.SWIMWEAR);
+
+        System.out.println("\nДобавление товаров из файла в список товаров:");
+        FileCopy fileCopy = new FileCopy();
+        fileCopy.readProductsFromFile();
+        System.out.println(productList.toString());
+
+        System.out.println("\nСчитывание товаров из списка товаров в файл:");
+        fileCopy.writeProductsToFile();
     }
 
     public static void createProduct(String productName, double price, int amountInStock) {
